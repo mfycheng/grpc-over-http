@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package echo.v1;
+
+option go_package = "examples/echo";
+
+import "google/protobuf/duration.proto";
+
+service Echo {
+    rpc Echo(EchoRequest) returns (EchoResponse);
+    rpc EchoStream(EchoStreamRequest) returns (stream EchoStreamResponse);
+}
+
+message EchoRequest{
+    string message = 1;
+    uint32 repetitions = 2;
+
+    int32 status_code = 3;
+}
+message EchoResponse{
+    string message = 2;
+}
+
+message EchoStreamRequest{
+    string message = 1;
+    uint32 repetitions = 2;
+
+    uint64 responses = 3;
+    google.protobuf.Duration interval = 4;
+
+    int32 status_code = 5;
+    int32 failure_index = 6;
+}
+
+message EchoStreamResponse{
+    string message = 1;
+    uint64 index = 2;
+}
