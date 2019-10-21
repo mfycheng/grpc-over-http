@@ -12,8 +12,8 @@ jobs:
       - checkout
       - run: mkdir -p $TEST_RESULTS
       - restore_cache:
-          - keys:
-              - v1-pkg-cache
+          keys:
+            - go-mod-${{ checksum go.sum }}
       - run: make deps
       - run: make test
       - store_test_results:
