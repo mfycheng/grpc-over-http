@@ -13,8 +13,13 @@ jobs:
       - run: mkdir -p $TEST_RESULTS
       - restore_cache:
           keys:
-            - go-mod-${{ checksum go.sum }}
+            - go-mod-{{ checksum go.sum }}
+            - go-mod-
+
       - run: make deps
       - run: make test
       - store_test_results:
           path: /tmp/test-results
+
+      - save_cache:
+          key: go-mod-{{ checksum go.sum }}
