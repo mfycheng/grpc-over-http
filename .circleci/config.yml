@@ -13,11 +13,14 @@ jobs:
       - run: mkdir -p $TEST_RESULTS
       - restore_cache:
           keys:
-            - go-mod-{{ checksum go.sum }}
-            - go-mod-
+            - go-mod-v1-{{ checksum "go.sum" }}
 
       - run: make deps
-      - run: make test
+      - run: gotestsum --junitfile $TEST_RESULTS/unit-tests.xml
 
+      - save_cache:
+          key: go-mod-v1{{ checksum "go.sum" }}
+          paths:
+            - /go/pkg/mod
       - store_test_results:
           path: /tmp/test-results
