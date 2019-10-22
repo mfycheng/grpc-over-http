@@ -19,7 +19,7 @@ jobs:
       - run: gotestsum --junitfile $TEST_RESULTS/unit-tests.xml
 
       - save_cache:
-          key: go-mod-v1{{ checksum "go.sum" }}
+          key: go-mod-v1-{{ checksum "go.sum" }}
           paths:
             - /go/pkg/mod
       - store_test_results:
