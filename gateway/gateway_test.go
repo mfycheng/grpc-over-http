@@ -126,6 +126,18 @@ func TestUnary_ErrorCodes(t *testing.T) {
 	}
 }
 
+func TestUnary_Websocket(t *testing.T) {
+	addr, cleanup := setup(t)
+	defer cleanup()
+
+	_, resp, err := websocket.DefaultDialer.Dial(
+		fmt.Sprintf("ws://%s/api/echo.v1.Echo/Echo", addr),
+		nil,
+	)
+	require.Equal(t, http.StatusMethodNotAllowed, resp.StatusCode)
+	require.Equal(t, websocket.ErrBadHandshake, err)
+}
+
 func TestStream_Happy(t *testing.T) {
 	addr, cleanup := setup(t)
 	defer cleanup()
@@ -190,6 +202,27 @@ func TestStream_ErrorCodes(t *testing.T) {
 		_, _, err = conn.ReadMessage()
 		assert.True(t, websocket.IsCloseError(err, 4000+int(i)))
 	}
+}
+
+func TestStream_NoWebsocket(t *testing.T) {
+	addr, cleanup := setup(t)
+	defer cleanup()
+
+	b, err := proto.Marshal(&echo.EchoStreamRequest{
+		Message:     "hello",
+		Repetitions: 2,
+		Responses:   3,
+		Interval:    ptypes.DurationProto(50 * time.Millisecond),
+	})
+	require.NoError(t, err)
+
+	resp, err := http.Post(
+		fmt.Sprintf("http://%s/api/echo.v1.Echo/EchoStream", addr),
+		"application/proto",
+		bytes.NewBuffer(b),
+	)
+	require.NoError(t, err)
+	assert.Equal(t, http.StatusBadRequest, resp.StatusCode)
 }
 
 type serv struct{}
