@@ -16,13 +16,14 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gorilla/websocket"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/mfycheng/grpc-over-http/examples/echo"
 	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	"mfycheng.dev/grpc-over-http/examples/echo"
 )
 
 func TestUnknown(t *testing.T) {

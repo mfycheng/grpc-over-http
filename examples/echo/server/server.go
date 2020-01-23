@@ -8,13 +8,14 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/ptypes"
-	"github.com/mfycheng/grpc-over-http/examples/echo"
-	"github.com/mfycheng/grpc-over-http/gateway"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	"mfycheng.dev/grpc-over-http/examples/echo"
+	"mfycheng.dev/grpc-over-http/gateway"
 )
 
 type serv struct{}

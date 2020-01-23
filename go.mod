@@ -1,4 +1,4 @@
-module github.com/mfycheng/grpc-over-http
+module mfycheng.dev/grpc-over-http
 
 go 1.13
 

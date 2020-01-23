@@ -9,9 +9,10 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/ptypes"
-	"github.com/mfycheng/grpc-over-http/examples/echo"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
+
+	"mfycheng.dev/grpc-over-http/examples/echo"
 )
 
 var (

@@ -12,8 +12,9 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/gorilla/websocket"
-	"github.com/mfycheng/grpc-over-http/examples/echo"
 	"github.com/pkg/errors"
+
+	"mfycheng.dev/grpc-over-http/examples/echo"
 )
 
 var (
